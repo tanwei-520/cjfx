@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>教师管理</title>
+    @Html.Partial("script")
+    <style type="text/css">
+                .table-striped > tbody > tr:nth-of-type(2n+1) {
+                    background-color: #f5f5f5;
+                }
+                .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+                    vertical-align: middle;
+                    text-align: center;
+                }
+                .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > td, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > thead > tr > th {
+                    white-space: pre-line;
+                }
+                /*.table-hover > tbody > tr:hover {
+          background-color:#74b7f2;
+        }*/
+                label, h3 {
+                    color: #0059B2;
+                }
+
+                .navbar-brand {
+                    padding: 0;
+                }
+
+                .pi {
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-top: 25px;
+                    padding-left: 15px;
+                }
+                /*.row{
+            margin-left:0;
+            margin-right:0;
+        }*/
+                .hk {
+                    background-color: #f8f8f8;
+                    border: 1px solid #e7e7e7;
+                }
+
+                .k {
+                    background-color: #f8f8f8;
+                    border: 1px solid #e7e7e7;
+                }
+
+                .col-lg-2 {
+                    margin-left: 2.33%;
+                }
+
+                .col-lg-9 {
+                    margin-left: 2.33%;
+                }
+
+                .tan {
+                    width: 220px;
+                    position: fixed;
+                    top: 35%;
+                    left: 40%;
+                    border-radius: 5px;
+                    box-shadow: 0 0 8px #666666;
+                    background-color: #ffffff;
+                    z-index: 9999;
+                    text-align: center;
+                }
+
+                @@media (min-width: 768px) {
+                    .collapse {
+                        display: block;
+                    }
+                }
+
+        @@media(max-width:765px) {
+            .navbar {
+                margin-bottom: 0;
+            }
+
+            .k {
+                margin-top: 25px;
+            }
+
+            .col-lg-9 {
+                margin-left: 0;
+            }
+
+            .col-lg-2 {
+                margin-left: 0;
+            }
+
+            .col-xs-12 {
+                margin: 0 auto;
+                margin-top: 2px;
+            }
+            /*.row{
+            margin-left:-15px;
+            margin-right:-15px;;
+        }*/
+                    .tan {
+                        left: 20%;
+                    }
+                }
+    </style>
+    <script type="text/javascript">
+        function bian2(n) {
+        $("#ban").show(1200);
+        $("#stuno").val($("#" + n + "").children('th').eq(0).text());
+        $("#name").val($("#" + n + "").children('th').eq(1).text());
+        $("#k1").val($("#" + n + "").children('th').eq(2).text());
+        $("#k2").val($("#" + n + "").children('th').eq(3).text());
+        $("#k3").val($("#" + n + "").children('th').eq(4).text());
+        $("#k4").val($("#" + n + "").children('th').eq(5).text());
+        $("#k5").val($("#" + n + "").children('th').eq(6).text());
+        $("#k6").val($("#" + n + "").children('th').eq(7).text());
+        }
+  $(document).ready(function(e) {
+        $("#up").hide();
+        $(function(){
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 80) {
+                    $("#up").fadeIn(300);
+                }
+                else {
+                    $("#up").fadeOut(300);
+                }
+            });
+        $("#up").click(function () {
+            $('body,html').animate({ scrollTop: 0 }, 400);
+            return false;
+        });
+        });
+});
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-right">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/Home/Index" class="navbar-brand"
+                   style="margin:0;padding:0;"><img src="~/Content/Img/logo.png" alt="成绩分析系统" /></a>
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right"
+                    style="margin-top:0;">
+                    <li class="active"><a href="###"><span class="glyphicon glyphicon-cog"></span> 管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="hk col-lg-2 col-sm-12 col-md-3 collapse" id="navbar-collapse">
+                <ul class="nav navbar" style="margin-top:15px;">
+                    <li>@Ajax.ActionLink(" 学生信息管理", "Xue", null, new AjaxOptions() { UpdateTargetId = "main" }, new { @class = "glyphicon glyphicon-th" })</li>
+                    <li>@Ajax.ActionLink(" 学生成绩分析", "Fen", null, new AjaxOptions() { UpdateTargetId = "main" }, new { @class = "glyphicon glyphicon-stats" })</li>
+                    <li>@Ajax.ActionLink(" 更改个人信息", "Gen", null, new AjaxOptions() { UpdateTargetId = "main" }, new { @class = "glyphicon glyphicon-user" })</li>
+                </ul>
+            </div>
+
+            <div class="k col-lg-9 col-sm-12" id="main">
+                @Html.Partial("Xue")
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tan" id="tan">
+        <h3 style="border-bottom:2px solid #0059B2; margin-top:10px; text-align:center;">提示</h3>
+        <p style="font-size:16px;" id="ti">成功!</p>
+        <p><a href="###" class="btn btn-primary" onclick="qu('tan')">确定</a></p>
+    </div>
+    <div class="tang" id="lend">
+        <div class="loader"></div>
+        加载中...
+    </div>
+    <div style="position:fixed;font-size:60px;right:10px;bottom:0;font-weight:bolder;">
+        <a href="###" id="up" style="font-weight:bolder;" title="返回顶部"><span class="glyphicon glyphicon-menu-up"></span></a>
+    </div>
+    <div id="ext"></div>
+</body>
+</html>

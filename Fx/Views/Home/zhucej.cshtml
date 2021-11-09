@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>教师注册</title>
+    @Html.Partial("script")
+    <style type="text/css">
+        label, h3 {
+            color: #0059B2;
+        }
+       .container p{
+           color:brown;
+           font-size:10px;
+           margin-bottom:0;
+           margin-top:2px;
+       }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-right">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand"
+                   style="margin:0;padding:0;"><img src="~/Content/Img/logo.png" alt="成绩分析系统" /></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right"
+                    style="margin-top:0;">
+                    <li class="active"><a href="###"><span class="glyphicon glyphicon-th-list"></span> 注册</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3 style="text-align:center;">教师注册</h3>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+            @using (Ajax.BeginForm("Zhuce", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "successs" }))
+            {
+                <form>
+                    <div class="form-group">
+                        <label>登录账号</label>
+                        <input type="text" class="form-control" placeholder="由6-11位数字组成" autocomplete="off" name="jlinq" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>用户名</label>
+                        <input type="text" class="form-control" placeholder="由2-15位字符组成，建议填写真实姓名" autocomplete="off" name="jname" />
+                    </div>
+                    <div class="form-group">
+                        <label>电子邮件</label>
+                        <input type="email" class="form-control" placeholder="输入您的电子邮件" autocomplete="off" name="je" />
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" id="jmima2" class="form-control" placeholder="6-11位字符组成" autocomplete="off" name="jmima2" />
+                    </div>
+                    <div class="form-group">
+                        <label>确认密码</label>
+                        <input type="password" class="form-control" placeholder="请确认您的密码" autocomplete="off" name="jmima" />
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <input type="submit" class="btn btn-group-lg btn-primary" value="提交" id="one" />
+                    </div>
+                </form>
+            }
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
+
+    <div class="tan" id="tan">
+        <h3 style="border-bottom:2px solid #0059B2; margin-top:10px; text-align:center;">提示</h3>
+        <p style="font-size:16px;" id="ti">成功!</p>
+        <p><a href="###" class="btn btn-primary" onclick="qu('tan')">确定</a></p>
+    </div>
+    @*<div class="tang" id="lend">
+            <div class="loader"></div>
+            加载中...
+        </div>*@
+    <script type="text/javascript">
+        $("#one").click(function () {
+            $("form").validate(
+                {
+                    rules: {
+                        jname: { required: true, rangelength: [2, 15] },
+                        jmima: { required: true, rangelength: [6, 11], equalTo: "#jmima2" },
+                        je: { required: true, email: true },
+                        jmima2: { required: true, rangelength: [6, 11] },
+                        jlinq: { required: true, rangelength: [6, 11],number:true }
+                    },
+                    messages: {
+                        jname: { required: "姓名不能为空", rangelength: "姓名在2-15个字符内" },
+                        jmima2: { required: "密码不能为空", rangelength: "密码在6-11个字符内" },
+                        jmima: { required: "密码不能为空", rangelength: "密码在6-11个字符内", equalTo: "两次密码不一致" },
+                        jlinq: { required: "登录账号不能为空", rangelength: "账号在6-11个字符内",number:"登录账号由数字组成" },
+                        je: { required: "电子邮件不能为空", email: "请输入正确的电子邮件" }
+                    }
+                })
+        })
+        function successs(data) {
+            if (data == "ok") {
+                $("#tan").show();
+                $("#ti").text("注册成功，5秒后将自动转到主页！");
+                setTimeout(function(){ window.location.href = "/Home/index";}, 5000);
+            }
+            else {
+                $("#tan").show();
+                $("#ti").text(data);
+            }
+        }
+    function qu(n) {
+            $("#" + n + "").hide(1000);
+        }
+    </script>
+</body>
+</html>

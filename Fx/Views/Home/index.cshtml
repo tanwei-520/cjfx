@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function Ling() {
+        try {
+            $.ajax({
+                type: "post",
+                url: "/Home/Ling",
+                data: { get: $("#unid").is(":checked"), id: $("#id").val(), pwd: $("#pwd").val() },
+                async: true,
+                success: function (data) {
+                    if (data == "ok") {
+                        window.location.href = "/Home/Ban";
+                    }
+                    else
+                        alert(data);
+                }
+            })
+        }
+        catch(exp){
+            alert(exp);
+        }
+    }
+</script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+<style type="text/css">
+#myCarousel {
+margin:20px 0 0 0;
+}
+.carousel-inner .item img {
+margin: 0 auto;
+}
+.carousel-inner{
+	margin-left:2px;
+}
+.col-lg-3{
+	width:24%;
+}
+.row{
+	margin-right:0;}
+.botm{
+	border:1px solid #e7e7e7;
+	background-color:#f8f8f8;
+	text-align:center;
+	font-size:10px;
+	margin-top:50px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:80px;
+	padding-top:18px;
+}
+.de{
+    border-radius:5px;
+    box-shadow:0 0 4px #666666;
+	background-color:#f8f8f8;
+    height:330px;
+	margin-top:19px;
+}
+.de a{
+	font-size:11px;
+	position:relative;
+}
+.tab-h2 {
+font-size: 20px;
+color: #0059B2;
+text-align: center;
+letter-spacing: 1px;
+}
+.tab-p {
+font-size: 15px;
+color: #999;
+text-align: center;
+letter-spacing: 1px;
+margin: 20px 0 40px 0;
+}
+.tab1 {
+margin: 30px 0;
+color: #666;
+}
+.tab1 .media-heading {
+margin: 5px 0 20px 0;
+}
+.tab1 .text-muted {
+color: #999;
+text-decoration: line-through;
+}
+.tab1 .media-heading {
+margin: 5px 0 20px 0;
+}
+.tab1 .text-muted {
+color: #999;
+text-decoration: line-through;
+}
+.tab1 .col {
+padding: 20px;
+}
+/* 小屏幕（平板，大于等于 768px） */
+@@media (min-width: 768px) {
+.tab-h2 {
+font-size: 26px;
+}
+.tab-p {
+font-size: 16px;
+}
+.col-lg-3{
+	width:24%;
+}
+}
+@@media(max-width:765px){
+.col-lg-3{
+	width:100%;
+}
+.carousel-inner{
+	margin-left:0;
+}
+.col-lg-9{
+	padding-right:0;
+}
+}
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@@media (min-width: 992px) {
+.tab-h2 {
+font-size: 28px;
+}
+.tab-p {
+font-size: 17px;
+}
+.col-lg-3{
+	width:24%;
+}
+}
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@@media (min-width: 1200px) {
+.tab-h2 {
+font-size: 30px;
+}
+.tab-p {
+font-size: 18px;
+}
+}
+</style>
+</head>
+
+<body style="background-image:url(../../Content/Img/body-bg.png)">
+<nav class="navbar navbar-default navbar-fixed-right">
+<div class="container">
+<div class="navbar-header">
+<a href="#" class="navbar-brand"
+style="margin:0;padding:0;"><img src="~/Content/Img/logo.png" alt="成绩分析系统"></a>
+</div>
+<div class="collapse navbar-collapse" id="navbar-collapse">
+<ul class="nav navbar-nav navbar-right"
+style="margin-top:0;">
+<li class="active"><a href="###"><span class="glyphicon
+glyphicon-home"></span> 登录</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="carousel">
+<div class="row">
+<div class="col-lg-9 col-md-12" id="k">
+<div id="myCarousel" class="carousel slide">
+<ol class="carousel-indicators">
+<li data-target="#myCarousel" data-slide-to="0"
+class="active"></li>
+<li data-target="#myCarousel" data-slide-to="1"></li>
+<li data-target="#myCarousel" data-slide-to="2"></li>
+<li data-target="#myCarousel" data-slide-to="3"></li>
+</ol>
+<div class="carousel-inner">
+<div class="item active" style="background:#1a1a1a;">
+<a href="#"><img  src="~/Content/Img/timg3.jpg" alt="第一张"></a>
+</div>
+<div class="item" style="background:#407970;">
+<a href="#"><img src="~/Content/Img/timg4.jpg"  alt="第二张"></a>
+</div>
+<div class="item" style="background:#f5f3e6;">
+<a href="#"><img src="~/Content/Img/timg2.jpg"  alt="第三张"></a>
+</div>
+<div class="item" style="background:#cfcfcf;">
+<a href="###"><img src="~/Content/Img/timg.jpg"  alt="第四张"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-12 de">
+<div style=" padding:30px 0 0 12px; margin-top:10px;">
+  <label>用户名</label>
+  <input type="text" id="id" placeholder="学号/登录账号"  class="form-control" autocomplete="off"/>
+  </div>
+   <div style=" padding:30px 0 0 12px;">
+   <label>密码</label>
+   <input type="password" id="pwd" placeholder="密码"  class="form-control" autocomplete="off" />
+   </div>
+    <div style=" padding:30px 25px 0 12px; float:left">
+    <input type="checkbox" class="checkbox-inline" id="unid"/><label style="font-size:11px; font-weight:normal; position:relative; top:3px; margin-left:8px">教师</label>
+    
+    </div>
+    <div style=" padding:30px 2px 0 25px; float:right;">
+     <input type="button" class="btn btn-group-lg btn-warning" onclick="Ling()" value="登陆"/>
+    </div>
+    <div style="position:absolute; bottom:40px; left:25px;">
+    <a href="/Home/zhucej" >教师注册</a>
+    </div>
+</div>
+<script type="text/javascript">
+$('#myCarousel').carousel({
+//设置自动播放/2 秒
+interval : 3000,
+});
+if($(window).width() < 780) {
+            $("#k").css("padding-right", 0);
+			$(".col-lg-3").css("width", "100%");
+			$(".carousel-inner").css("margin-left", 0);
+        };
+</script>
+</div>
+</div>
+
+<div class="tab1">
+<div class="container">
+<h2 class="tab-h2">「 成绩分析系统有那些功能 」</h2>
+<p class="tab-p">方便的信息管理，准确的的成绩分析，合理的时间管理，强大的服务团队！</p>
+<div class="row">
+<div class="col-md-6 col">
+<div class="media">
+<div class="media-left media-top">
+<a href="###">
+<img class="media-object"
+src="~/Content/Img/tab2.png" width="100" height="100" alt="...">
+</a>
+</div>
+<div class="media-body">
+<h4 class="media-heading">信息管理</h4>
+<p class="text-muted">其他：操作麻烦，作用点不清楚。</p>
+<p>我们：方便，快速的增删查改学生信息，方便班级管理。</p>
+</div>
+</div>
+</div>
+<div class="col-md-6 col">
+<div class="media">
+<div class="media-left media-top">
+<a href="###">
+<img class="media-object"
+src="~/Content/Img/tab1-1.png" alt="...">
+</a>
+</div>
+<div class="media-body">
+<h4 class="media-heading">成绩分析</h4>
+<p class="text-muted">其他：分析杂乱，没有针对性。</p>
+<p>我们：准确的的成绩分析，发现学生的不足，进行针对化的辅导，帮助您提升学生成绩！</p>
+</div>
+</div>
+</div>
+<div class="col-md-6 col">
+<div class="media">
+<div class="media-left media-top">
+<a href="###">
+<img class="media-object"
+src="~/Content/Img/tab1-3.png" alt="...">
+</a>
+</div>
+<div class="media-body">
+<h4 class="media-heading">课时安排</h4>
+<p class="text-muted">其他：无法保证上课效率、没
+有时间表，任务无法完成！</p>
+<p>其他：保证正常的上课效率、制定一张时间表、当天的
+任务当天完成！</p>
+</div>
+</div>
+</div>
+<div class="col-md-6 col">
+<div class="media">
+<div class="media-left media-top">
+<a href="###">
+<img class="media-object"
+src="~/Content/Img/tab3.png" width="100" height="100" alt="...">
+</a>
+</div>
+<div class="media-body">
+<h4 class="media-heading">服务团队</h4>
+<p class="text-muted">其他：社会招聘的、服务水平
+参差不齐的普通员工！</p>
+<p>其他：内部培养、经受过良好高端服务培训的高标准员
+工！</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--<div class="botm">
+<p>&copy;XX信息技术有限公司   京ICP备12041916号-4</p>
+<P>地址：北京市海淀区上地东路 35 号颐泉汇写字楼 516 室     联系电话：400-008-1078 </P>
+</div>-->
+</body>
+</html>

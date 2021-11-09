@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Fx.Models.bandb_Result>
+@foreach (var item in Model)
+{
+    <tr>
+        <th>@item.jname</th>
+        <th>@item.bname</th>
+        <th>@item.pin</th>
+        <th>@item.zd</th>
+        <th>@item.zx</th>
+</tr>
+}

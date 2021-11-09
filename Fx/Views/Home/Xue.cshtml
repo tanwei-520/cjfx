@@ -1,0 +1,215 @@
+﻿<script type="text/javascript">
+    function bian(n) {
+        $("#ban").show(1200);
+        $("#stuno").val($("#" + n + "").children('th').eq(0).text());
+        $("#name").val($("#" + n + "").children('th').eq(1).text());
+        $("#nv").val($("#" + n + "").children('th').eq(2).text());
+        $("#date").val($("#" + n + "").children('th').eq(3).text());
+    }
+    function qu(n) {
+        $("#" + n + "").hide(1000);
+    }
+    function suess(data) {
+        if (data.lastIndexOf("有误") >= 0) {
+            $("#tan").show();
+            $("#ti").text(data);
+            $("#lend").hide();
+            return false;
+        }
+        else {
+            $("#tan").show();
+            $("#ti").text(data);
+            $("#lend").hide();
+        }
+    }
+    //function oncomple(data) {
+    //    var str = JSON.stringify(data);
+    //    var obj = jQuery.parseJSON(str);
+    //    if (obj.responseText.length<15) {
+    //        $("#tan").show();
+    //        $("#ti").text(data);
+    //        $("#lend").hide();
+    //    }
+    //}
+    function to() {
+        $("#lend").show();
+        var a = $("#exls").val();
+        if (!a.lastIndexOf(".exls")) {
+            $("#tan").show();
+            $("#ti").text("文件类型有误！");
+            return false;
+        }
+    }
+    function yan() {
+            var a = $("#stuno2").val();
+            var b = $("#name2").val();
+            var d = $("#date2").val();
+        if (a.length > 12 || a.length < 6) {
+                $("#tan").show();
+                $("#ti").text("学号在6-12个字符间");
+                return false;
+        }
+        if (b.length > 12 || b.length < 2) {
+                $("#tan").show();
+                $("#ti").text("姓名在2-12个字符间");
+                return false;
+        }
+        //var reg =  /^[0-9]{4}-[0-1]?[0-9]{1}-[0-3]?[0-9]{1}$/;
+        var reg2 = /^[0-9]{4}\/[0-1]?[0-9]{1}\/[0-3]?[0-9]{1}$/;
+        if (reg2.test(d) == false) {
+            $("#tan").show();
+            $("#ti").text("日期格式错误！yyyy/MM/dd");
+            return false;
+        }
+    }
+    function yan2() {
+            var a = $("#stuno").val();
+            var b = $("#name").val();
+            var d = $("#date").val();
+        if (a.length > 12 || a.length < 6) {
+                $("#tan").show();
+                $("#ti").text("学号在6-12个字符间");
+                return false;
+        }
+        if (b.length > 12 || b.length < 2) {
+                $("#tan").show();
+                $("#ti").text("姓名在2-12个字符间");
+                return false;
+        }
+        //var reg =  /^[0-9]{4}-[0-1]?[0-9]{1}-[0-3]?[0-9]{1}$/;
+        var reg2 = /^[0-9]{4}\/[0-1]?[0-9]{1}\/[0-3]?[0-9]{1}$/;
+        if (reg2.test(d) == false) {
+            $("#tan").show();
+            $("#ti").text("日期格式错误！yyyy/MM/dd");
+            return false;
+        }
+    }
+</script>
+<div class="row" id="ban" style="display:none;">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+        <h3 style="text-align:center;">修改信息</h3>
+        @using (Ajax.BeginForm("Exitxue", new AjaxOptions() { HttpMethod = "Post", OnBegin = "yan2", OnSuccess = "qu('ban')", UpdateTargetId = "xuexiang" }))
+        {
+        <form>
+            <div class="form-group">
+                <label>学号</label>
+                <input type="text" class="form-control" autocomplete="off" id="stuno" name="id" readonly="readonly"/>
+            </div>
+            <div class="form-group">
+                <label>姓名</label>
+                <input type="text" class="form-control" autocomplete="off" id="name" name="name" />
+            </div>
+            <div class="form-group">
+                <label>性别</label>
+                <select class="form-control" id="nv" name="sex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>出生日期</label>
+                <input type="text" class="form-control" autocomplete="off" id="date" name="bir"/>
+            </div>
+            <div class="form-group" style="text-align:center;">
+                <input type="submit" class="btn btn-group-lg btn-primary" value="修改" />
+                <input type="button" class="btn btn-group-lg btn-primary" value="取消" onclick="qu('ban')" />
+            </div>
+        </form>
+       }
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+
+<div class="row" id="zen" style="display:none;">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+        <h3 style="text-align:center;">添加信息</h3>
+        @using (Ajax.BeginForm("Addxue", new AjaxOptions() { HttpMethod = "Post", OnBegin = "yan", OnSuccess = "qu('zen')", UpdateTargetId = "xuexiang" }))
+        {
+            <form>
+                <div class="form-group">
+                    <label>学号</label>
+                    <input type="text" class="form-control" autocomplete="off" placeholder="由6-12位字符组成" id="stuno2" name="xid"/>
+                </div>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" autocomplete="off" placeholder="由2-12位字符组成" id="name2" name="xname" />
+                </div>
+                <div class="form-group">
+                    <label>性别</label>
+                    <select class="form-control" id="nv2" name="xsex">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>出生日期</label>
+                    <input type="text" class="form-control" autocomplete="off" id="date2"  name="xbir"/>
+                </div>
+                <div class="form-group" style="text-align:center;">
+                    <input type="submit" class="btn btn-group-lg btn-primary" value="添加" />
+                    <input type="button" class="btn btn-group-lg btn-primary" value="取消" onclick="qu('zen')" />
+                </div>
+            </form>
+        }
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+<div class="row">
+    <p class="pi col-lg-4 col-sm-12">
+        <a href="###" class="btn btn-default" onclick="$('#zen').show(1000)"><span class="glyphicon glyphicon-plus"></span>添加学生信息</a>
+        @Html.ActionLink("导出","Dao",null,new { @class="btn btn-default"})
+    </p>
+    <div class="col-lg-8 col-sm-12" style="margin-top:25px;">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12">
+                @using (Ajax.BeginForm("Execlin", "Home", new AjaxOptions()
+                {
+                    OnBegin="to",
+                    HttpMethod = "post",
+                    OnSuccess = "suess",
+                    OnFailure="alert('导入失败！')"
+                }, new { enctype = "multipart/form-data" }))
+                {
+                    <form>
+                        <input type="file" class="btn btn-default" accept="application/msexcel" style="float:left;" id="exls" name="exls"/>
+                        <input type="submit" class="btn btn-default" value="导入" style="margin-left:12px" />
+                    </form>
+                }
+                    <p style="margin-top:8px; font-size:10px; color:#FF3300;">请上传后缀名为.exls的Excel文件，第一次导入请先查看示例</p>
+                </div>
+            <div class="col-lg-4 col-sm-12" style="margin-top:8px;">
+                <a href="~/Content/学生导入模板.xlsx">下载模板</a>
+                <a href="~/Content/学生导入示例.xlsx">下载示例</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>出生日期</th>
+                    <th>操作</th>
+                </tr>
+            <tbody id="xuexiang">
+                @Html.Action("Xuexiang")
+            </tbody>
+        </table>
+    </div>
+</div>
+@*<div class="row" style="text-align:center; margin-bottom:15px;">
+    <a href="###" class="btn btn-default">上一页</a>
+    <a href="###" class="btn btn-default">下一页</a>
+    <p style="font-size:10px; margin-top:5px;">共30条数据 当前第1页，共3页</p>
+</div>*@

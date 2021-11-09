@@ -1,0 +1,234 @@
+﻿@model IEnumerable<Fx.Models.Ling>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的班级</title>
+    @Html.Partial("script")
+    <script type="text/javascript">
+        function bian(n) {
+            $("#ban").show(1200);
+            $("#name").val($("#" + n + " h3").text());
+            $("#text").val($("#" + n + " h5").text());
+            $("#id").val(n);
+        }
+        function qu(n) {
+            $("#" + n + "").hide(1000);
+        }
+        function successs(data) {
+            if (data.lastIndexOf("有误") >= 0) {
+                $("#tan").show();
+                $("#ti").text(data);
+                $("#lend").hide();
+                return false;
+            }
+            else {
+                $("#tan").show();
+                $("#ti").text(data);
+                $("#lend").hide();
+            }
+       }
+    //    function oncomple(data) {
+    //    var str = JSON.stringify(data);
+    //    var obj = jQuery.parseJSON(str);
+    //    if (obj.responseText.length<15) {
+    //        $("#tan").show();
+    //        $("#ti").text(obj.responseText);
+    //        $("#form1").attr("data-ajax-update",1)
+    //            return false;
+    //    }
+    //}
+        function yan() {
+            var a = $("#bname").val();
+            var b = $("#btext").val();
+            if (a.length > 20 || a.length < 2) {
+                $("#tan").show();
+                $("#ti").text("班级名称在2-20个字符间");
+                return false;
+            }
+            if (b.length> 20) {
+                $("#tan").show();
+                $("#ti").text("班级名称在20个字符内");
+                return false;
+            }
+            if ($("#k4").val() == $("#k5").val() || $("#k4").val() == $("#k6").val() || $("#k5").val() == $("#k6").val()) {
+                $("#tan").show();
+                $("#ti").text("所选科目重复！");
+                return false;
+            }
+        }
+        function yan2() {
+            var a = $("#name").val();
+            var b = $("#text").val();
+            if (a.length > 20 || a.length < 2) {
+                $("#tan").show();
+                $("#ti").text("班级名称在2-20个字符间");
+                return false;
+            }
+            if (b.length> 20) {
+                $("#tan").show();
+                $("#ti").text("班级名称在20个字符内");
+                return false;
+            }
+        }
+    </script>
+    <style type="text/css">
+        .row a {
+            margin-top: 5px;
+        }
+
+        .row p {
+            text-align: center;
+        }
+
+        .row h3, h5 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        label, h3 {
+            color: #0059B2;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-right">
+<div class="container">
+<div class="navbar-header">
+<a href="/Home/Index" class="navbar-brand"
+style="margin:0;padding:0;"><img src="~/Content/Img/logo.png" alt="成绩分析系统"></a>
+</div>
+<div class="collapse navbar-collapse" id="navbar-collapse">
+<ul class="nav navbar-nav navbar-right"
+style="margin-top:0;">
+<li class="active"><a href="###"><span class="glyphicon glyphicon-globe"></span> 班级</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<div class="container" id="ban" style="display:none;">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-6">
+    <h3 style="text-align:center;">班级信息</h3>
+    @using (Ajax.BeginForm("Extban", new AjaxOptions() { HttpMethod = "Post", OnBegin = "yan2", OnSuccess = "qu('ban')", UpdateTargetId = "shua"}))
+    {
+    <form>
+        <div class="form-group" style="display:none;">
+            <label>班级编号</label>
+            <input type="text" class="form-control" autocomplete="off" id="id" name="id"/>
+        </div>
+        <div class="form-group">
+            <label>班级名称</label>
+            <input type="text" class="form-control" autocomplete="off" id="name" name="name"/>
+        </div>
+        <div class="form-group">
+            <label>班级介绍</label>
+            <input type="text" class="form-control" autocomplete="off" id="text" name="text"/>
+        </div>
+        <div class="form-group" style="text-align:center;">
+            <input type="submit" class="btn btn-group-lg btn-primary" value="修改" />
+            <input type="button" class="btn btn-group-lg btn-primary" value="取消" onclick="qu('ban')" />
+        </div>
+    </form>
+    }
+</div>
+<div class="col-lg-3">
+</div>
+</div>
+
+<div class="container" id="zen" style="display:none;">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+        <h3 style="text-align:center;">添加班级</h3>
+        @using (Ajax.BeginForm("Addban", new AjaxOptions() { HttpMethod = "Post",OnBegin="yan",OnSuccess="qu('zen')", UpdateTargetId="shua"}))
+        {
+            <form>
+                <div class="form-group">
+                    <label>班级名称</label>
+                    <input type="text" class="form-control" placeholder="由2-20位字符组成" autocomplete="off" name="bname" id="bname"/>
+                </div>
+                <div class="form-group">
+                    <label>班级介绍</label>
+                    <input type="text" class="form-control" placeholder="20字以内(非必填)" autocomplete="off" name="btext" id="btext"/>
+                </div>
+                <div class="form-group">
+                    <label>选择年级</label>
+                    <select class="form-control" name="nian">
+                        <option value="1">高一</option>
+                        <option value="2">高二</option>
+                        <option value="3">高三</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>科目一</label>
+                    <select class="form-control" id="k4" name="k4">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.id">@item.name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>科目二</label>
+                    <select class="form-control" id="k5" name="k5">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.id">@item.name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>科目三</label>
+                    <select class="form-control" id="k6" name="k6">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.id">@item.name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group" style="text-align:center;">
+                    <P style="font-size:10px; color:#FF3300;">说明：数学，英语，语文三个科目系统会自动添加，教师只需添加其余三个科目</P>
+                    <P style="font-size:10px; color:#FF3300;">注意：班级科目选定后将无法更改！</P>
+                    <input type="submit" class="btn btn-group-lg btn-primary" value="添加" id="on" />
+                    <input type="button" class="btn btn-group-lg btn-primary" value="取消" onclick="qu('zen')" />
+                </div>
+            </form>
+        }
+    </div>
+    <script type="text/javascript">
+        $("#on").click(function () {
+            $("form").validate(
+                {
+                    rules: {
+                        bname: { required: true, rangelength: [2, 20] },
+                        btext: { rangelength: [0, 20] },
+                    },
+                    messages: {
+                        bname: { required: "班级名称不能为空", rangelength: "姓名在2-15个字符内" },
+                        btext: { rangelength: "介绍在20个字符内" },
+                    },
+                })
+        })
+    </script>
+    <div class="col-lg-3">
+    </div>
+</div>
+   <p class="container" style="font-size:16px; font-weight:bold; margin-top:25px;"><a href="###" class="btn btn-default" onclick="$('#zen').show(1000)"><span class="glyphicon glyphicon-plus"></span>添加班级</a></p>
+    <p class="container" style="font-size:18px; font-weight:bold; margin-top:25px;">我的班级</p>
+    	<div class="container">
+		<div class="row" id="shua">
+            @Html.Action("Banxiang")
+       </div>
+       </div>
+<div class="tan" id="tan">
+<h3 style="border-bottom:2px solid #0059B2; margin-top:10px; text-align:center;">提示</h3>
+<p style="font-size:16px;" id="ti">成功!</p>
+<p><a href="###" class="btn btn-primary" onclick="qu('tan')">确定</a></p>
+</div>
+</body>
+</html>

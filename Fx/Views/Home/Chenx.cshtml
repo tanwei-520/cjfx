@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Fx.Models.Chenx>
+@foreach (var item in Model)
+{
+<tr id="@item.id">
+    <th>@item.id</th>
+    <th>@item.name</th>
+    <th>@item.k1</th>
+    <th>@item.k2</th>
+    <th>@item.k3</th>
+    <th>@item.k4</th>
+    <th>@item.k5</th>
+    <th>@item.k6</th>
+    <th>@Ajax.ActionLink(" ", "Delfen", new { id = item.id }, new AjaxOptions() { Confirm = "将删除学号为" + item.id + "的成绩！", UpdateTargetId = "chen" }, new { @class = "btn btn-info col-xs-12 col-lg-4 glyphicon glyphicon-trash" })
+    <a href="#" class="btn btn-warning col-xs-12 col-lg-4 col-lg-offset-3" onclick="bian2('@item.id')"><span class="glyphicon glyphicon-pencil" style="height:20px;"></span> </a></th>
+</tr>
+}

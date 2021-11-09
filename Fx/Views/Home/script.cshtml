@@ -1,0 +1,60 @@
+﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style type="text/css">
+    .tang {
+        position: fixed;
+        top: 45%;
+        left: 46%;
+        z-index: 9999;
+        font-size: 12px;
+        text-align: center;
+        display:none;
+    }
+
+    .loader {
+        border: 9px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 9px solid #0059B2;
+        width: 56px;
+        height: 56px;
+        /* animation-name:load; */
+        animation: load 1.2s linear infinite;
+    }
+
+    @@keyframes load {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .tan {
+        width: 220px;
+        position: fixed;
+        top: 35%;
+        left: 40%;
+        border-radius: 5px;
+        box-shadow: 0 0 8px #666666;
+        background-color: #ffffff;
+        z-index: 9999;
+        text-align: center;
+        display:none;
+    }
+
+    @@media(max-width:765px) {
+        .tan {
+            left: 20%;
+        }
+    }
+
+    body {
+        background-image: url(../../Content/Img/body-bg.png);
+    }
+</style>

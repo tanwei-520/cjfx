@@ -1,0 +1,109 @@
+﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/echarts.min.js"></script>
+<script src="~/Scripts/fenxi.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#lend").show();
+        Jibu1();
+        Jibu2();
+        Jibu3();
+        Kufen();
+        Zhanbi();
+        Top();
+        Pindui();
+        setTimeout(function () { $("#lend").hide(); }, 4000);
+    });
+</script>
+<div class="row">
+    <h3 style="text-align:center" id="biaoti">XX班级成绩分析</h3>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>班级名称</th>
+                    <th>所属年级</th>
+                    <th>班级人数</th>
+                    <th>考试人数</th>
+                </tr>
+            </thead>
+            <tr id="bxinxi">
+                <th>2018级7班</th>
+                <th>高一年级</th>
+                <th>0</th>
+                <th>0</th>
+            </tr>
+            <thead>
+                <tr>
+                    <th>平均数</th>
+                    <th>中位数</th>
+                    <th>最高分</th>
+                    <th>最低分</th>
+                </tr>
+            </thead>
+            <tr id="zongfen">
+                <th>0</th>
+                <th>0</th>
+                <th>0</th>
+                <th>0</th>
+            </tr>
+            <thead>
+                <tr>
+                    <th>不及格率</th>
+                    <th>及格率</th>
+                    <th>良好率</th>
+                    <th>优秀率</th>
+                </tr>
+            </thead>
+            <tr id="lv">
+                <th>0.00%</th>
+                <th>0.00%</th>
+                <th>0.00%</th>
+                <th>0.00%</th>
+            </tr>
+        </table>
+        <P style="font-size:10px;padding-left:10px; color:#FF3300;">
+            等第划分：分数在总分60%以下为不及格，60%-79%为及格，80%-89%为良好，90%-100%为优秀
+            (若分数在第等过渡区则视为较好第等)
+        </P>
+    </div>
+</div>
+<div class="row" style="border-bottom:1px solid #333333">
+    <h3 style="text-align:center">详细分析</h3>
+    <div class="col-lg-8" style="height:320px;" id="kefen"></div>
+    <div class="col-lg-4" style="height:320px;"><p id="ketext" class="row" style="margin:auto;line-height:35px;margin-top:85px;font-weight:bold;"></p></div>
+</div>
+<div class="row" style="border-bottom:1px solid #333333">
+    <div class="col-lg-4" style="height:300px;" id="zhanbi1"></div>
+    <div class="col-lg-4" style="height:300px;" id="zhanbi2"></div>
+    <div class="col-lg-4" style="height:300px;">
+        <label style="font-size:20px;color:#333333">TOP5</label>
+        <p id="zhanbi3" style="margin:auto;line-height:35px;margin-top:75px;font-weight:bold;"></p>
+    </div>
+</div>
+<div class="row" style="border-bottom:1px solid #333333">
+    <p style="font-size:20px;font-weight:bolder;text-align:center">同年级下班级情况对比</p>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>教师姓名</th>
+                    <th>班级名称</th>
+                    <th>班级平均分</th>
+                    <th>班级最高分</th>
+                    <th>班级最低分</th>
+                </tr>
+            </thead>
+            @Html.Action("Bandui")
+        </table>
+    </div>
+    <P style="font-size:10px;padding-left:10px; color:#FF3300;">
+        注意：总成绩为零的班级不会被统计在内
+    </P>
+</div>
+<div class="row">
+    <p style="font-size:20px;font-weight:bolder;text-align:center">同年级下班级平均分排序对比</p>
+    <div id="Pindui" style="height:300px;"></div>
+    <P style="font-size:10px;padding-left:10px; color:#FF3300;">
+        注意：总成绩为零的班级不会被统计在内
+    </P>
+</div>

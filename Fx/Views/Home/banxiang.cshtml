@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Fx.Models.banxiang>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+    <div class="col-xs-12 col-md-3 col-sm-4">
+        <div class="thumbnail">
+            <img src="~/Content/Img/bj.png" height="200">
+            <div class="caption" id="@item.id">
+                <h3>@item.name</h3>
+                <h5>@item.text</h5>
+                <p>@Html.ActionLink("进入","Main","Home",new {id=item.id },new {@class="btn btn-default" }) @Ajax.ActionLink("删除","Delban",new { id=item.id},new AjaxOptions() {HttpMethod="get",UpdateTargetId="shua",Confirm="删除班级将删除班级下的所以数据！",},new {@class="btn btn-default"  }) <a href="#" class="btn btn-default" onclick="bian('@item.id')">编辑</a></p>
+            </div>
+        </div>
+    </div>
+    }
+}

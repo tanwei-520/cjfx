@@ -1,0 +1,245 @@
+﻿@model Fx.Models.selban_Result
+<script type="text/javascript">
+    function bian(n) {
+        $("#ban").show(1200);
+        $("#stuno").val($("#" + n + "").children('th').eq(0).text());
+        $("#name").val($("#" + n + "").children('th').eq(1).text());
+        $("#k1").val($("#" + n + "").children('th').eq(2).text());
+        $("#k2").val($("#" + n + "").children('th').eq(3).text());
+        $("#k3").val($("#" + n + "").children('th').eq(4).text());
+        $("#k4").val($("#" + n + "").children('th').eq(5).text());
+        $("#k5").val($("#" + n + "").children('th').eq(6).text());
+        $("#k6").val($("#" + n + "").children('th').eq(7).text());
+    }
+    function qu(n) {
+        $("#" + n + "").hide(1000);
+    }
+    function suess(data) {
+        if (data.lastIndexOf("有误") >= 0) {
+            $("#tan").show();
+            $("#ti").text(data);
+            $("#lend").hide();
+            return false;
+        }
+        else {
+            $("#tan").show();
+            $("#ti").text(data);
+            $("#lend").hide();
+        }
+    }
+    function to() {
+        $("#lend").show();
+        var a = $("#exls").val();
+        if (!a.lastIndexOf(".exls")) {
+            $("#tan").show();
+            $("#ti").text("文件类型有误！");
+            return false;
+        }
+    }
+    //function oncomple(data) {
+    //    var str = JSON.stringify(data);
+    //    var obj = jQuery.parseJSON(str);
+    //    if (obj.responseText.length<15) {
+    //        $("#tan").show();
+    //        $("#ti").text(data);
+    //        $("#lend").hide();
+    //    }
+    //}
+    function yan4() {
+        var a = $("#stuno2").val();
+                if (a.length > 12 || a.length < 6) {
+                    alert(a);
+            $("#tan").show();
+            $("#ti").text("学号在6-12个字符间");
+            return false;
+                }
+                if (isNaN($("#c1").val()) || isNaN($("#c2").val()) || isNaN($("#c3").val()) || isNaN($("#c4").val()) || isNaN($("#c5").val()) || isNaN($("#c6").val())) {
+            $("#tan").show();
+            $("#ti").text("成绩有误！");
+            return false;
+        }
+    }
+    function yan5() {
+        var a = $("#stuno").val();
+                if (a.length > 12 || a.length < 6) {
+                    alert(a);
+            $("#tan").show();
+            $("#ti").text("学号在6-12个字符间");
+            return false;
+                }
+                if (isNaN($("#k1").val()) || isNaN($("#k2").val()) || isNaN($("#k3").val()) || isNaN($("#k4").val()) || isNaN($("#k5").val()) || isNaN($("#k6").val())) {
+            $("#tan").show();
+            $("#ti").text("成绩有误！");
+            return false;
+        }
+      }
+</script>
+<style type="text/css">
+     .te{
+	 width:48%;
+	 float:left;
+ }
+ .tr{
+	 margin-left:4%;
+ }
+</style>
+<div class="row" id="ban" style="display:none;">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+        <h3 style="text-align:center;">修改信息</h3>
+        @using (Ajax.BeginForm("Exitfue", new AjaxOptions() { HttpMethod = "Post", OnBegin = "yan5", OnSuccess = "qu('ban')", UpdateTargetId = "chen",OnComplete="oncomple" }))
+        {
+            <form>
+                <div class="form-group">
+                    <label>学号</label>
+                    <input type="text" class="form-control" autocomplete="off" placeholder="由6-12位字符组成" id="stuno"  readonly="readonly" name="xid"/>
+                </div>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" autocomplete="off" placeholder="由2-12位字符组成" id="name" />
+                </div>
+                <div class="form-group te">
+                    <label>@Model.c1</label>
+                    <input type="text" class="form-control" autocomplete="off" id="k1" name="c1"/>
+                </div>
+                <div class="form-group te tr">
+                    <label>@Model.c2</label>
+                    <input type="text" class="form-control" autocomplete="off" id="k2" name="c2"/>
+                </div>
+                <div class="form-group te">
+                    <label>@Model.c3</label>
+                    <input type="text" class="form-control" autocomplete="off" id="k3" name="c3"/>
+                </div>
+                <div class="form-group te tr">
+                    <label>@Model.c4</label>
+                    <input type="text" class="form-control" autocomplete="off" id="k4" name="c4"/>
+                </div>
+                <div class="form-group te">
+                    <label>@Model.c5</label>
+                    <input type="text" class="form-control" autocomplete="off" id="k5" name="c5"/>
+                </div>
+                <div class="form-group te tr">
+                    <label>@Model.c6</label>
+                    <input type="text" class="form-control" autocomplete="off" id="k6" name="c6"/>
+                </div>
+                <div class="form-group" style="text-align:center;">
+                    <input type="submit" class="btn btn-group-lg btn-primary" value="修改" />
+                    <input type="button" class="btn btn-group-lg btn-primary" value="取消" onclick="qu('ban')" />
+                </div>
+            </form>
+        }
+        </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+
+<div class="row" id="zen" style="display:none;">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+        <h3 style="text-align:center;">添加信息</h3>
+        @using (Ajax.BeginForm("Addfen", new AjaxOptions() { HttpMethod = "Post", OnBegin = "yan4", OnSuccess = "qu('zen')", UpdateTargetId = "chen" ,OnComplete="oncomple" }))
+        {
+            <form>
+                <div class="form-group">
+                    <label>学号</label>
+                    <input type="text" class="form-control" autocomplete="off" placeholder="由6-12位字符组成" id="stuno2" name="xid"/>
+                </div>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" autocomplete="off" placeholder="由2-12位字符组成" id="name2" />
+                </div>
+                <div class="form-group te">
+                    <label>@Model.c1</label>
+                    <input type="text" class="form-control" autocomplete="off" id="c1" name="c1"/>
+                </div>
+                <div class="form-group te tr">
+                    <label>@Model.c2</label>
+                    <input type="text" class="form-control" autocomplete="off" id="c2" name="c2"/>
+                </div>
+                <div class="form-group te">
+                    <label>@Model.c3</label>
+                    <input type="text" class="form-control" autocomplete="off" id="c3" name="c3"/>
+                </div>
+                <div class="form-group te tr">
+                    <label>@Model.c4</label>
+                    <input type="text" class="form-control" autocomplete="off" id="c4" name="c4"/>
+                </div>
+                <div class="form-group te">
+                    <label>@Model.c5</label>
+                    <input type="text" class="form-control" autocomplete="off" id="c5" name="c5"/>
+                </div>
+                <div class="form-group te tr">
+                    <label>@Model.c6</label>
+                    <input type="text" class="form-control" autocomplete="off" id="c6" name="c6"/>
+                </div>
+                <div class="form-group" style="text-align:center;">
+                    <P style="font-size:10px; color:#FF3300;">注意：此处学号需与学生信息的学号相匹配，成绩为空时系统将默认为0分</P>
+                    <input type="submit" class="btn btn-group-lg btn-primary" value="添加" />
+                    <input type="button" class="btn btn-group-lg btn-primary" value="取消" onclick="qu('zen')" />
+                </div>
+            </form>
+        }
+        </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+<P class="pi" style="padding-left:0; margin-bottom:0;">@Ajax.ActionLink("进入成绩分析", "Fenmain", null, new AjaxOptions() { UpdateTargetId = "main" }, new { @class = "btn btn-default" })</P>
+<div class="row">
+    <p class="pi col-lg-4 col-sm-12">
+        <a href="###" class="btn btn-default" onclick="$('#zen').show(1000)"><span class="glyphicon glyphicon-plus"></span>添加成绩信息</a>
+        @Html.ActionLink("导出","Daox",null,new { @class="btn btn-default"})
+    </p>
+    <div class="col-lg-8 col-sm-12" style="margin-top:25px;">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12">
+                @using (Ajax.BeginForm("Rux", "Home", new AjaxOptions()
+                {
+                    OnBegin = "to",
+                    HttpMethod = "post",
+                    OnSuccess = "suess",
+                    OnFailure = "alert('导入失败！')"
+                }, new { enctype = "multipart/form-data" }))
+                {
+                    <form>
+                        <input type="file" class="btn btn-default" accept="application/msexcel" style="float:left;" id="exls" name="exls"/>
+                        <input type="submit" class="btn btn-default" value="导入" style="margin-left:12px" />
+                    </form>
+                }
+                    <p style="margin-top:8px; font-size:10px; color:#FF3300;">请上传后缀名为.exls的Excel文件，第一次导入请先查看示例</p>
+                </div>
+            <div class="col-lg-4 col-sm-12" style="margin-top:8px;">
+                @Html.ActionLink("下载模板", "Dmu", null, null)
+                <a href="~/Content/成绩导入示例.xlsx">下载示例</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>@Model.c1</th>
+                    <th>@Model.c2</th>
+                    <th>@Model.c3</th>
+                    <th>@Model.c4</th>
+                    <th>@Model.c5</th>
+                    <th>@Model.c6</th>
+                    <th>操作</th>
+                </tr>
+            <tbody id="chen">
+                @Html.Action("Chenx")
+            </tbody>
+        </table>
+    </div>
+</div>
+@*<div class="row" style="text-align:center; margin-bottom:15px;">
+    <a href="###" class="btn btn-default">上一页</a>
+    <a href="###" class="btn btn-default">下一页</a>
+    <p style="font-size:10px; margin-top:5px;">共30条数据 当前第1页，共3页</p>
+</div>*@

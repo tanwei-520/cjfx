@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e90d80edf909459f8d7293483ec543d8" Name="Diagram1">
+        <EntityTypeShape EntityType="fxModel.ban" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="fxModel.bchen" Width="1.5" PointX="4.875" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="fxModel.bxue" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="fxModel.jiao" Width="1.5" PointX="0.625" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="fxModel.kechen" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="fxModel.FK_ban1" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_ban2" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_ban3" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_ban4" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_ban5" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_ban6" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_bxbid" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_jid" ManuallyRouted="false" />
+        <AssociationConnector Association="fxModel.FK_bcahrx" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

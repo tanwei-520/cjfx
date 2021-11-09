@@ -1,0 +1,67 @@
+﻿@model Fx.Models.jiao
+    <div class="row">
+        <h3 style="text-align:center;">个人信息修改</h3>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+            @using (Ajax.BeginForm("Gen", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "successs" }))
+            {
+                <form>
+                    <div class="form-group">
+                        <label>用户名</label>
+                        <input type="text" class="form-control" placeholder="由2-15位字符组成，建议填写真实姓名" autocomplete="off" name="jname" value="@Model.jname" />
+                    </div>
+                    <div class="form-group">
+                        <label>电子邮件</label>
+                        <input type="email" class="form-control" placeholder="输入您的电子邮件" autocomplete="off" name="je" value="@Model.je"/>
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" id="jmima2" class="form-control" placeholder="6-11位字符组成" autocomplete="off" name="jmima2" />
+                    </div>
+                    <div class="form-group">
+                        <label>确认密码</label>
+                        <input type="password" class="form-control" placeholder="请确认您的密码" autocomplete="off" name="jmima" />
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <input type="submit" class="btn btn-group-lg btn-primary" value="提交" id="one" />
+                    </div>
+                </form>
+            }
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("#one").click(function () {
+            $("form").validate(
+                {
+                    rules: {
+                        jname: { required: true, rangelength: [2, 15] },
+                        jmima: {  rangelength: [6, 11], equalTo: "#jmima2" },
+                        je: { required: true, email: true },
+                        jmima2: { rangelength: [6, 11] },
+                    },
+                    messages: {
+                        jname: { required: "姓名不能为空", rangelength: "姓名在2-15个字符内" },
+                        jmima2: {  rangelength: "密码在6-11个字符内" },
+                        jmima: { rangelength: "密码在6-11个字符内", equalTo: "两次密码不一致" },
+                        je: { required: "电子邮件不能为空", email: "请输入正确的电子邮件" }
+                    }
+                })
+        })
+          function successs(data) {
+            if (data == "ok") {
+                $("#tan").show();
+                $("#ti").text("修改成功，5秒后将自动转到主页！");
+                setTimeout(function(){ window.location.href = "/Home/index";}, 5000);
+            }
+            else {
+                $("#tan").show();
+                $("#ti").text(data);
+            }
+        }
+    function qu(n) {
+            $("#" + n + "").hide(1000);
+        }
+   </script>
